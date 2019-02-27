@@ -7,19 +7,31 @@ import Login from '../pages/Login/Login.vue'
   export default [
     {
       path:'/maite',
-      component:Msite
+      component:Msite,
+      meta:{
+        showFoot:true
+      }
     },
     {
       path:'/order',
-      component:Order
+      component:Order,
+      meta:{
+        showFoot:true
+      }
     },
     {
       path:'/profile',
-      component:Profile
+      component:Profile,
+      meta:{
+        showFoot:true
+      }
     },
     {
       path:'/search',
-      component:Search
+      component:Search,
+      meta:{
+        showFoot:true
+      }
     },
     {
       path:'/login',

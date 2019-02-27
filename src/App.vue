@@ -2,7 +2,7 @@
   <div>
     <!--<Header/>-->
     <router-view/>
-    <Foot/>
+    <Foot v-show="$route.meta.showFoot"/>
   </div>
 </template>
 
