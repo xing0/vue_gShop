@@ -47,7 +47,12 @@
       return {}
     },
     computed :{
-      ...mapState(['address','categorys','shops']),
+      ...mapState({
+        address :state=>state.msite.address,
+        categorys :state=>state.msite.categorys,
+        shops :state=>state.msite.shops,
+
+      }),
       categorysArr (){
         const {categorys} =this
         let arr =[]

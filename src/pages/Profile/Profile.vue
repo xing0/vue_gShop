@@ -105,7 +105,9 @@
       return {}
     },
     computed :{
-      ...mapState(['user'])
+      ...mapState({
+        user:state=>state.user.user
+      })
     },
     methods:{
       loginOut (){

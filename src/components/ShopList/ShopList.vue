@@ -68,7 +68,9 @@
       return {}
     },
     computed: {
-      ...mapState(['shops'])
+      ...mapState({
+        shops:state=>state.msite.shops
+      })
     },
     components: {
       Star,
