@@ -73,8 +73,6 @@
       categorys () { // categorys状态数据更新
         /*将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新*/
         this.$nextTick(()=>{
-          console.log(this.categorysArr)
-          console.log(1)
           new Swiper ('.swiper-container', {
             // direction: 'vertical', // 垂直切换选项
             loop: true, // 循环模式选项
