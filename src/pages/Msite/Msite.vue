@@ -24,7 +24,7 @@
               <div class="food_container">
                 <img :src="'https://fuss10.elemecdn.com'+c.image_url">
               </div>
-              <span>{{category.title}}</span>
+              <span>{{c.title}}</span>
             </a>
 
           </div>

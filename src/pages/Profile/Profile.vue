@@ -4,17 +4,17 @@
     <Header title="我的"></Header>
 
     <section class="profile-number">
-      <a href="javascript:" class="profile-link" @click="$router.push('/login')">
+      <a href="javascript:" class="profile-link" @click="$router.push(user._id?'/user_info':'/login')">
         <div class="profile_image">
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top">{{user.name?user.name:'登录/注册'}}</p>
           <p>
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
+            <span class="icon-mobile-number">{{user.phone?user.phone:'暂无绑定手机号'}}</span>
           </p>
         </div>
         <span class="arrow">
@@ -90,15 +90,38 @@
         </div>
       </a>
     </section>
+    <section v-show="user._id">
+      <!--<button @click="loginOut">退出登陆</button>-->
+      <mt-button  @click="loginOut" size="large" type="danger">退出登陆</mt-button>
+    </section>
   </section>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+  import {MessageBox,Button } from 'mint-ui'
   export default {
     data () {
       return {}
     },
-    components: {}
+    computed :{
+      ...mapState(['user'])
+    },
+    methods:{
+      loginOut (){
+        //退出登陆按钮 分发action
+      //   if(confirm('确定退出登陆吗?'))
+      //   this.$store.dispatch('loginOut')
+        MessageBox.confirm('确定退出吗?')
+          .then(()=>this.$store.dispatch('loginOut'))
+          .catch(()=>{})
+      }
+
+    },
+    components:{
+      [Button.name]:Button
+    }
+
   }
 </script>
 

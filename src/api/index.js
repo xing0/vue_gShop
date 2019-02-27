@@ -14,3 +14,14 @@ export const reqPhoneCode = ({phone})=>ajax(BASE+'/sendcode',{phone})
 export const reqPhoneCodeLogin = ({phone,code})=>ajax(BASE+'/login_sms',{phone,code},'post')
 //账号密码登陆
 export const reqPwdCodeLogin = ({name,pwd,captcha})=>ajax(BASE+'/login_pwd',{name,pwd,captcha},'post')
+//账号登出
+export const reqLoginOut= ()=>ajax(BASE+'/logout')
+//自动登陆
+export const reqAutoLogin= ()=>ajax(BASE+'/userinfo')
+//获取商户的食品列表
+export const reqShopGoods= ()=>ajax('/goods')
+//获取商户的评论列表
+export const reqShopRatings= ()=>ajax('/ratings')
+//获取商户的详情列表
+export const reqShopInfo= ()=>ajax('/info')
+

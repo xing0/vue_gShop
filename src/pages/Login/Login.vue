@@ -6,7 +6,7 @@
           <h2 class="login_logo">硅谷外卖</h2>
           <div class="login_header_title">
             <a href="javascript:;" :class="{on:isSMS}" @click="isSMS=true">短信登录</a>
-            <a href="javascript:;" :class="{on:!isSMS}" @click="isSMS=false">密码登录</a>
+            <a href="javascript:;" :class="{on:!isSMS}" @click="isSMS=false" @click.once="updateCaptcha">密码登录</a>
           </div>
         </div>
         <div class="login_content">
@@ -59,6 +59,7 @@
 
 <script>
   import {reqPhoneCode,reqPhoneCodeLogin,reqPwdCodeLogin} from '../../api'
+  import {Toast} from 'mint-ui'
   export default {
     data () {
       return {
@@ -100,7 +101,7 @@
             const res = await reqPhoneCode({phone})
             if(res.code===0){
               console.log('发送成功')
-              alert('发送成功')
+              Toast('发送成功')
             }else{
               alert(res.msg)
               this.timeout=0
@@ -123,7 +124,7 @@
            const res = reqPhoneCodeLogin({phone,code:SMS})
            if(res.code===0){
              console.log('登陆成功')
-             alert('登陆成功')
+             Toast('登陆成功')
            }else{
              alert(res.msg)
              this.timeout=0
@@ -137,7 +138,9 @@
           console.log(res)
           if(res.code===0){
              console.log('登陆成功')
-             alert('登陆成功')
+            Toast('登陆成功')
+            this.$store.dispatch('saveUser',res.data)
+            this.$router.back()
            }else{
              alert(res.msg)
             this.updateCaptcha()
@@ -149,7 +152,7 @@
        }
      },
      updateCaptcha (){
-      this.$refs.img.src = `http://localhost:5000/captcha?time=${Date.now()}`
+       this.$refs.img.src = `http://localhost:5000/captcha?time=${Date.now()}`
      }
    }
   }

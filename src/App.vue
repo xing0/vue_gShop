@@ -10,6 +10,9 @@
   import Foot from './components/footerGuide/footerGuide.vue'
   import Header from './components/Header/Header.vue'
 export default {
+    mounted (){
+        this.$store.dispatch('autoLogin')
+    },
   components: {
     Foot,
     Header
