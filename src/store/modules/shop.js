@@ -1,8 +1,10 @@
-import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS,RECEIVE_USER,
-  RECEIVE_LOGINOUT,
+import Vue from 'vue'
+import {
   RECEIVE_SHOPGOODS,
   RECEIVE_SHOPINFO,
-  RECEIVE_SHOPRATINGS
+  RECEIVE_SHOPRATINGS,
+  RECEIVE_ADDFOODCOUNT,
+  RECEIVE_SUBFOODCOUNT
 } from '../mutation-types'
 
 const state={
@@ -26,12 +28,25 @@ const mutations ={
   [RECEIVE_SHOPRATINGS] (state,ratings){
     state.ratings=ratings
   },
+  [RECEIVE_ADDFOODCOUNT] (state,{food}){
+    if(food.count){
+      food.count++
+    }else {
+      Vue.set(food,'count',1)
+    }
+  },
+  [RECEIVE_SUBFOODCOUNT] (state,{food}){
+    if(food.count>0){
+      food.count--
+    }
+  }
 }
 const actions = {
   // 获取商户 食物 详情 评论
-  async getShopGoods({commit}){
+  async getShopGoods({commit},callback){
     const res = await reqShopGoods()
     if(res.code===0)commit(RECEIVE_SHOPGOODS,res.data)
+    typeof callback === 'function' && callback()
   },
   async getShopInfo({commit}){
     const res = await reqShopInfo()
@@ -41,6 +56,13 @@ const actions = {
     const res = await reqShopRatings()
     if(res.code===0)commit(RECEIVE_SHOPRATINGS,res.data)
   },
+  updataFoodCount ({commit},{isAdd,food}){
+    if(isAdd){
+      commit(RECEIVE_ADDFOODCOUNT,{food})
+    }else{
+      commit(RECEIVE_SUBFOODCOUNT,{food})
+    }
+  }
 }
 
 const getters={

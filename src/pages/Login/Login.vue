@@ -93,17 +93,13 @@
           if(!isPhone){
             alert('手机号错误')
             return
-          }else if(!/^\d{6}$/.test(SMS)){
-
-              alert('验证码必须6位数字')
-              return
           }else{
             const res = await reqPhoneCode({phone})
             if(res.code===0){
               console.log('发送成功')
               Toast('发送成功')
             }else{
-              alert(res.msg)
+              Toast(res.msg)
               this.timeout=0
             }
           }
@@ -117,16 +113,17 @@
            alert('手机号错误')
            return
          }else if(!/^\d{6}$/.test(SMS)){
-
            alert('验证码必须6位数字')
            return
          }else{
-           const res = reqPhoneCodeLogin({phone,code:SMS})
+           const res =await reqPhoneCodeLogin({phone,code:SMS})
            if(res.code===0){
              console.log('登陆成功')
              Toast('登陆成功')
+             this.$store.dispatch('saveUser',res.data)
+             this.$router.back()
            }else{
-             alert(res.msg)
+             Toast(res.msg)
              this.timeout=0
            }
          }

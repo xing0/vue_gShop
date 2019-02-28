@@ -2,7 +2,7 @@
   <div class="shop-header" v-if="info.supports">
     <nav class="shop-nav"
          :style="{backgroundImage: `url(${info.bgImg})`}">
-      <a class="back">
+      <a class="back" @click="$router.back()">
         <i class="iconfont icon-arrow_left"/>
       </a>
     </nav>
@@ -44,6 +44,7 @@
       </div>
     </div>
     <!--店铺详情页-->
+    <transition name="fade">
     <div class="shop-brief-modal" v-show="showBulletin" >
       <div class="brief-modal-content">
         <h2 class="content-title">
@@ -85,7 +86,9 @@
       </div>
       <div class="brief-modal-cover"  @click="showBulletin=false"></div>
     </div>
+    </transition>
     <!--底部优惠活动列表-->
+    <transition name="move">
     <div class="activity-sheet" v-show="showSupports">
       <div class="activity-sheet-content">
         <h2 class="activity-sheet-title">优惠活动</h2>
@@ -102,8 +105,9 @@
           <span class="iconfont icon-close"></span>
         </div>
       </div>
-      <div class="activity-sheet-cover"></div>
+      <div class="activity-sheet-cover" @click="showSupports=false"></div>
     </div>
+    </transition>
   </div>
 
 </template>
@@ -428,7 +432,7 @@
       z-index 99
       &.move-enter-active, &.move-leave-active
         transition opacity .3s
-      &.move-enter-active, &.move-leave-active
+      &.move-enter, &.move-leave-to
         opacity 0
       .activity-sheet-content
         position absolute

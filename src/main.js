@@ -3,8 +3,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import Header from './components/Header/Header.vue'
 import store from './store'
+import Header from './components/Header/Header.vue'
+import CartControl from './components/CartControl/CartControl.vue'
+
+
+Vue.component('CartControl',CartControl)
 Vue.component('Header',Header)
 import './mock/mokeSever'
 
